@@ -1,0 +1,206 @@
+@charset "utf-8";
+@import "_var", "_mixin", "_function";
+
+#pcheader{
+    @include flex;
+    @include justify-content(space-between);
+    @include align-items;
+    position: fixed;top: 0;left: 0;width: 100%;height: 90px;transition: background 0.5s;z-index: 999;
+    .logo, .util, #pcgnb{position: absolute;}
+    .logo, .util{z-index: 1000;}
+    .logo{
+      left: 60px;
+      a{display: block;background: url("../images/common/header/header_logo.png") no-repeat;left: 60px;width: 194px;height: 37px;}
+    }
+    .util{
+        right: 60px;
+        li{float: right;padding-left: 15px;}
+        }
+    #pcgnb{
+      top: 0px;left: 0;width: 100%;text-align: center;
+        .depth1{
+            @include flex;
+            @include justify-content;
+            > li.on{color: $Mgreen;}
+            > li > a{
+                position: relative;font-size: 20px;display: block;width: 180px;padding: 35px 0;
+                &::before, &::after{
+                  content: "";position: absolute;left: 50%;transform: translate(-50%);
+                }
+                &::before{bottom: 1px;width: 0;height: 3px;background: $green;transition: width 0.3s;}
+                &::after{bottom: -5px;border: 6px solid transparent;border-bottom: none;}
+            }
+            > li.on a::before, > li:hover a::before{width: 100%;}
+            > li.on a::after, > li:hover a::after{border-top-color: $green}
+        }
+        .depth2{
+          width: 100%;font-size: 16px;height: 300px;padding-top: 30px;background: #A2AB9F;
+          &::before{content:"";position: absolute;display: block;background: $Lgreen;top: 0;left: 0;width: 100%;height: 100%;z-index: -1;}
+            li{
+              padding-top: 30px;
+            &:hover a, &:focus a{color: $green;font-weight: 700;}
+            }
+        }
+    }
+
+}
+#pcheader.on{
+     &,#pcgnb{background: #A2AB9F;}
+    .logo a{
+        background-image: url("../images/common/header/header_logo_on.png");width: 194px;height: 39px;
+    }
+     .util{color: $green}
+}
+#mheader{
+  display: flex;justify-content: space-between;align-items: center;position: fixed;top: 0;left: 0;width: 100%;height: 56px;background: #fff;color:$green;box-sizing: border-box;z-index: 100;
+  .logo, .util, .gnb_open_btn{
+    @include translateY-50;
+    position: absolute;top: 50%;
+  }
+  .logo{left: 3%;background: url(../images/common/header/header_Tablet_logo.png) no-repeat;width: 150px;height: 31px;}
+  .util{
+    right: 7%;
+    li{float: right;padding-right: 10px;}
+    }
+  .gnb_open_btn{right: 45px;bottom: -5px;}
+  .gnb_wrap{
+    position: fixed;top: 0;left: 100%;width: 100%;height: 100%;overflow-y: auto;background: #A2AB9F;color: #fff;visibility: hidden;
+    #gnb > ul{padding-top: 70px;}
+    #gnb a{display: block;}
+    #gnb > ul > li > a{position: relative;padding: 15px 40px;font-size: 20px;font-weight: 500;}
+    #gnb > ul > li:not(.gnb5) > a::before, #gnb > ul > li:not(.gnb5) > a::after{content: "";position: absolute;right: 40px;top: 50%;width: 12px;height: 2px;background: #fff;}
+    #gnb > ul > li:not(.gnb5) > a::after{transform: rotate(90deg);transition: transform 0.5s;}
+    #gnb > ul > li.on:not(.gnb5) > a::after{transform: rotate(0deg);}
+    #gnb ul li ul{visibility: hidden;overflow: hidden;max-height: 0;}
+    #gnb ul li ul li a{padding: 5px 40px;background: rgba(83, 95, 79, .5);height: 50px;line-height: 40px;}
+
+    .gnb_close_btn{position: absolute;right: 3%;top: 16px;}
+  }
+}
+
+#footer{
+  height: 400px;background-color: $Mgreen;text-align: center;
+  ul{
+    @include flex;
+    @include justify-content;
+  }
+  .info{
+    border-bottom:1px solid #fff;
+    li{padding: 30px 70px;}
+  }
+  .sns{
+    ul{
+      li{padding: 10px;}
+    }
+  }
+  .logo{background: url(../images/common/footer/logo.png);width: 149px;height: 29px;margin: 20px auto;}
+  address{line-height: 1.5;}
+  p{padding-top: 20px;font-size: 13px;}
+}
+
+#mheader{visibility: hidden;height: 0;overflow: hidden;}
+
+
+// 작은 PC
+@media screen and (max-width: 1440px) {
+    #pcheader{
+        .logo{
+          a{background-image: url("../images/common/header/header_logo.png");width: 194px;height: 40px;}
+        }
+        .depth1{
+          > li > a{font-size: vw-calc1440(30);} 
+        }
+    }
+    #pcheader.on{
+         &,#pcgnb{background: $Lgreen;}
+        .logo a{
+            background-image: url("../images/common/header/header_logo_on.png");width: 194px;height: 40px;
+        }
+         .util{color: $green}
+    }
+     .btn_top{
+      right: vw-calc1440(5);width: vw-calc1440(80);height: vw-calc1440(80);background: $brown url(../images/common/footer/top_btn.png) no-repeat 50% vw-calc1440(21);line-height: vw-calc1440(102);
+    }
+
+}
+// 작은 PC
+@media screen and (max-width: 1350px) {
+ #pcheader{display: none;}
+ #mheader{
+  visibility: visible;height: 56px;overflow: visible;
+  .gnb_wrap{
+    #gnb > ul{padding-top: 100px;}
+    #gnb > ul > li > a{padding: 20px 40px;font-size: 30px;}
+    #gnb > ul > li:not(.gnb5) > a::before, #gnb > ul > li:not(.gnb5) > a::after{width: 30px;height: 3px;}
+    #gnb ul li ul li a{height: 70px;line-height: 70px;font-size: 20px;}
+  }
+ }
+ #footer{
+  .info{
+    li{padding: vw-calc1350(30) vw-calc1350(70);}
+  }
+ }
+}
+
+//태블릿
+@media screen and (max-width: 1024px) {
+  #mheader{
+    .util{
+      right: vw-calc1024(60);
+      li{padding-right: vw-calc1024(5);}
+    }
+    .gnb_open_btn{right: vw-calc1024(15);bottom: vw-calc1024(-15);}
+  } 
+  #footer{
+    .info{
+      li{padding: 20px 40px;font-size: 14px;}
+    }
+   }
+}
+
+//모바일
+@media screen and (max-width: 770px) {
+  #mheader{
+    .logo{background: url(../images/common/header/M_logo.png) no-repeat;width: 95px;height: 20px;}
+    .util{display:none;}
+    .gnb_open_btn{content: "\e91c";font-family: "xeicon";font-size: 1em;}
+    .gnb_close_btn{content: "\e902";font-family: "xeicon";font-size: 1em;}
+  }
+
+  #footer{
+    position: relative;text-align: left;padding: 80px 0 0 30px;
+    > ul{display:none;}
+    .sns{
+      position: absolute;top: 40px;left: 30px;
+      ul{
+        li{padding-right: 10px;}
+      }
+    }
+    .logo{margin: vw-calc770(15) 0;}
+    address{line-height: 1.5;}
+    p{padding-top: 20px;font-size: 13px;}
+
+    .btn_top{
+      width: vw-calc770(80);height: vw-calc770(80);background: $brown url(../images/common/footer/top_btn.png) no-repeat 50% vw-calc770(15);line-height: vw-calc770(102);font-size: vw-calc770(14);
+    }
+
+  }
+
+}
+
+//모바일
+@media screen and (max-width: 414px) {
+  #footer{
+    height: 350px;padding: vw-calc414(110) 0 0 vw-calc414(20);font-size: vw-calc414(16);
+    .sns{
+      top: vw-calc414(60);left: vw-calc414(20);
+      ul{
+        li{padding-right: vw-calc414(10);}
+      }
+    }
+    .logo{padding:vw-calc414(15) 0;}
+    p{padding-top: vw-calc414(20);font-size: vw-calc414(13);}
+  }
+
+    
+}

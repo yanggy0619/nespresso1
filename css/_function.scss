@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+@function vw-calc1440($px) {
+    $vwSize: $px / (1440 / 100);
+    @return #{$vwSize}vw;
+  }
+
+  @function vw-calc1350($px) {
+    $vwSize: $px / (1350 / 100);
+    @return #{$vwSize}vw;
+  } 
+
+  @function vw-calc1024($px) {
+    $vwSize: $px / (1024 / 100);
+    @return #{$vwSize}vw;
+  }
+
+  @function vw-calc770($px) {
+    $vwSize: $px / (770 / 100);
+    @return #{$vwSize}vw;
+  }
+
+  @function vw-calc414($px) {
+    $vwSize: $px / (414 / 100);
+    @return #{$vwSize}vw;
+  }
+
